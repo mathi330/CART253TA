@@ -8,43 +8,58 @@
 
 "use strict";
 
+let numCircles = 100;
+
+let circle = {
+    x: [],
+    y: [],
+    size: [],
+    alpha: []
+};
 
 
-/**
- * Description of preload
-*/
-function preload() {
-    
-}
 
-
-/**
- * Description of setup
-*/
 function setup() {
-    createCanvas(500, 500);
-    rectMode(CENTER);
+    createCanvas(windowWidth, 200);
+    background(0);
+    rectMode(CENTER); // to make the text box in the center
 }
-
-
-/**
- * Description of draw()
-*/
-
-let speedX = 1;
-let speedY = 1;
-
 
 function draw() {
     background(0);
-    triangle(0, 55, 28, 0, 56, 55);
+    myBackground();
     
-    push();
-    translate(width/2, height/2);
-    rotate(PI/5);
-    rect(0, 0, 100, 100);
-    pop();
-    
-    rect(100, 200, 50, 50);
-    
+    let s = 'The quick brown fox jumped over the lazy dog.';
+    fill(200);
+    textSize(32);
+    textAlign(CENTER);
+    text(s, width/2, height/2, width/3, 80); // Text wraps within text box
+}
+
+
+
+function myBackground(){
+    for(let i = 0; i < numCircles; i++){
+        PlaceCircles();
+        displayCircles(circle.x[i], circle.y[i], circle.size[i], circle.alpha[i]);
+    }
+}
+
+function PlaceCircles(){
+    let x = random(0, width);
+    let y = random(0, height);
+    let size = random(5, 50);
+    let alpha = random(30, 100);
+
+    circle.x.push(x);
+    circle.y.push(y);
+    circle.size.push(size);
+    circle.alpha.push(alpha);
+}
+
+function displayCircles(x, y, size, alpha) {
+    noFill();
+    strokeWeight(2);
+    stroke(255, alpha);
+    ellipse(x, y, size);
 }

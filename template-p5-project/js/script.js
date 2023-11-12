@@ -18,11 +18,23 @@ function preload() {
 
 }
 
+let distanceGroup = [];
 
 /**
  * Description of setup
 */
 function setup() {
+    
+    for(let i = 0; i < fishGroup.length; i++){
+        distanceGroup[i] = distanceCalculate(fishGroup[i]);
+        
+        
+    }
+}
+
+function distanceCalculate(fish){
+    let d =dist(user.x, user.y, fish.x, fish.y);
+    return d
 }
 
 
